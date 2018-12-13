@@ -8,45 +8,50 @@ class Zipcode extends React.Component
     super(props);
     this.orientation = props.orientation;
     this.state = {
-      orientation: this.orientation
+      zipcode: ''
     }
-    this.handleClick = this.handleClick.bind(this);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    const value = event.target.value;
+    this.setState({zipcode: value});
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    this.props.onSubmit(
+      this.state.zipcode
+    )
   }
 
   render() {
     return (
-      <div className="zipcodedisplay"
-        style={{'flexDirection': this.orientation}}>
-        <input
-          name="zipcode"
-          id="zipcode"
-          className="inputcontrol"
-          placeholder='Milford, MA'>
-        </input>
-        <button
-          id="goButton"
-          value="Weather"
-          onClick={this.handleClick}
-          >
-          Get Weather
-        </button>
+      <div className="zipcode-display"
+        style={{'flexDirection': this.props.orientation}}>
+        <form className="forms" onSubmit={this.handleSubmit}>
+          <input
+            name="zipcode"
+            id="zipcode"
+            className="inputcontrol"
+            placeholder='Milford, MA'
+            onChange={this.handleChange}>
+          </input>
+          <button
+            id="goButton"
+            value="Weather"
+            type="submit"
+            >
+            Get Weather
+          </button>
+        </form>
 
       </div>)
   }
 
-  handleClick() {
-    this.swapBody();
-    api.queryWeatherApiCurrentWeather('01757');
-  }
-
-  swapBody() {
-    //alert("Clicked");
-    var mainBody = document.getElementById('mainBody');
-    //mainbody.style
-    mainBody.innerHTML = "<p>Loading..</p>";
-    mainBody.style.backgroundImage = "none";
-    //console.log(mainBody);
-  }
 }
 
 Zipcode.propTypes = {

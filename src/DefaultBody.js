@@ -1,11 +1,22 @@
 import React from 'react';
+import Zipcode from './Zipcode';
 
-function DefaultBody() {
-  return (<div
-    className="mainBody"
+class DefaultBody extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render () {
+    return (<div
+    className="main-body"
     id="mainbody">
-      This is the default body
+    <div className="body-button-container">
+      <Zipcode
+        orientation="column"
+        className="body-zipcode"
+        onSubmit={this.props.onSubmit}/>
+      </div>
     </div>);
+  }
 }
 
 export default DefaultBody
