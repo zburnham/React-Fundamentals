@@ -10,6 +10,7 @@ class DefaultBody extends React.Component {
     className="main-body"
     id="mainbody">
     <div className="body-button-container">
+      <h2 className="subheader white">Enter ZIP Code</h2>
       <Zipcode
         orientation="column"
         className="body-zipcode"

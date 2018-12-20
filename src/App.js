@@ -1,11 +1,10 @@
 import React from 'react';
 import Navbar from './Navbar';
 import api from './utilities/api';
-//import ReactRouter from 'react-router-dom';
-//import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import DefaultBody from './DefaultBody';
 import WeatherBody from './WeatherBody';
 import Zipcode from './Zipcode';
+import datamangler from './utilities/datamangler';
 
 
 class App extends React.Component {
@@ -13,7 +12,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       view: 'form',
-      currentWeather: {},
+      weatherInfo: [],
       zipcode: '',
       error: ''
     };
@@ -35,14 +34,17 @@ class App extends React.Component {
   }
 
   handleZipcode(zipcode) {
+    this.setState({zipcode: zipcode})
     this.getWeatherInfo(zipcode);
+    this.setState({view: 'results'});
   }
 
   getWeatherInfo(zipcode) {
     this.setState({view: 'results'});
     const info = api.queryWeatherApi5dayForecast(zipcode);
     info.then(data => {
-      this.setState({currentWeather: data});
+      //console.log(data);
+      this.setState({weatherInfo: datamangler(data)});
     }).catch(data => {
       this.setState({error: data.message});
     });
@@ -55,7 +57,9 @@ class App extends React.Component {
           <Navbar
             onSubmit={this.handleZipcode}
           />
-          <DefaultBody /> //form
+          <DefaultBody
+            onSubmit={this.handleZipcode}
+          />
         </div>
       );
     } else {
@@ -64,7 +68,8 @@ class App extends React.Component {
           <Navbar
             onSubmit={this.handleZipcode}/>
           <WeatherBody
-            weatherInfo={this.state.currentWeather}
+            weatherInfo={this.state.weatherInfo}
+            zipcode={this.state.zipcode}
             error={this.state.error}
           />
         </div>

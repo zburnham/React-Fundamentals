@@ -100,7 +100,6 @@ p {
 
 .zipcode-display {
   display: flex;
-
 }
 
 #root {
@@ -117,7 +116,37 @@ p {
 }
 
 .body-button-container {
-  width: 20%;
+  width: 30%;
   margin: auto;
-  padding-top: 50px;
+  padding-top: 100px;
+}
+
+.horizontal-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 100px;
+}
+
+.weather-input {
+  height: 50px;
+  width: 50px;
+}
+
+.subheader {
+    font-size: 30px;
+    color: #333;
+    font-weight: 100;
+}
+
+.white {
+  color: #FFF;
+}
+
+.description-container {
+    font-size: 34px;
+    font-weight: 100;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
 }

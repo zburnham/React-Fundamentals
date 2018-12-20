@@ -37,7 +37,7 @@ class Zipcode extends React.Component
             name="zipcode"
             id="zipcode"
             className="inputcontrol"
-            placeholder='Milford, MA'
+            placeholder='01757'
             onChange={this.handleChange}>
           </input>
           <button
@@ -61,6 +61,5 @@ Zipcode.propTypes = {
 Zipcode.defaultProps = {
   orientation: 'row'
 }
-
 
 export default Zipcode;
